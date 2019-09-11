@@ -7,6 +7,4 @@ public interface CallBack {
     
     //Método genérico de CallBack que permite paso de un objeto
     default void panelDeLlamada(Object o){};
-    
-    default void panelSalvapantallas(){};
 }

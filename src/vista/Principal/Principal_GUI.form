@@ -25,29 +25,47 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="labCabecera" pref="773" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labCabecera" pref="773" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="butNotasRapidas" min="-2" pref="154" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="butConsultarCitas" min="-2" pref="154" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="labNotasRapidas" min="-2" pref="154" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="labConsultarCitas" min="-2" pref="154" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="labb" min="-2" pref="154" max="-2" attributes="0"/>
+                          <Component id="butt" min="-2" pref="154" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="butNotasRapidas" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
-                      <Component id="labNotasRapidas" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="labCerrarSesion" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
-                      <Component id="butCerrarSesion" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="butSalir" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
-                      <Component id="labSalir" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="144" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="228" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="labCerrarSesion" min="-2" pref="154" max="-2" attributes="0"/>
+                  <Component id="butCerrarSesion" min="-2" pref="154" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="butSalir" min="-2" pref="154" max="-2" attributes="0"/>
+                  <Component id="labSalir" min="-2" pref="154" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,24 +74,29 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="labCabecera" min="-2" pref="56" max="-2" attributes="0"/>
-              <EmptySpace pref="468" max="32767" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="179" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="butCerrarSesion" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
-                      <Component id="butNotasRapidas" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
-                      <Component id="butSalir" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labNotasRapidas" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labCerrarSesion" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labSalir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="180" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="butNotasRapidas" min="-2" pref="134" max="-2" attributes="0"/>
+                  <Component id="butConsultarCitas" min="-2" pref="134" max="-2" attributes="0"/>
+                  <Component id="butt" min="-2" pref="134" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labb" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labConsultarCitas" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labNotasRapidas" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="butCerrarSesion" min="-2" pref="134" max="-2" attributes="0"/>
+                  <Component id="butSalir" min="-2" pref="134" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labCerrarSesion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labSalir" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="68" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -92,30 +115,6 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="labSalir">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Ebrima" size="14" style="1"/>
-        </Property>
-        <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="gf"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="butNotasRapidas">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="butCerrarSesion">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="butSalir">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JLabel" name="labNotasRapidas">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -125,6 +124,39 @@
         <Property name="text" type="java.lang.String" value="fg"/>
       </Properties>
     </Component>
+    <Component class="javax.swing.JButton" name="butNotasRapidas">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labConsultarCitas">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ebrima" size="14" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="fg"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="butConsultarCitas">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labb">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ebrima" size="14" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="gf"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="butt">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JLabel" name="labCerrarSesion">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -133,6 +165,25 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="fg"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="butCerrarSesion">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labSalir">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ebrima" size="14" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="fg"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="butSalir">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

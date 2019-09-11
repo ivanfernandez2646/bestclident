@@ -258,11 +258,6 @@ public class ClinicaDental_GUI extends javax.swing.JFrame implements MetodosUtil
         }
     }//GEN-LAST:event_formWindowClosing
 
-    @Override
-    public void panelSalvapantallas() {
-        this.setVisible(true);
-    }
-
     
     /**
      * @param args the command line arguments
