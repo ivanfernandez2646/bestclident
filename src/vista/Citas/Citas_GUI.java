@@ -444,6 +444,12 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
             }
         }
     }
+    
+    private void limpiarCampos(){
+        txtSeleccionarCliente.setText("");
+        cmbBoxSeleccionarServicio.setSelectedIndex(-1);
+        rellenarCalendario();
+    }
 
     //Permite recuperar todos los Servicios de la BBDD para mostrarlos en el
     //Combo-Box y seleccionar uno.
@@ -484,6 +490,11 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
         }
     }//GEN-LAST:event_checkBoxMañanaTardeItemStateChanged
 
+    //Concatena la fecha para enviar al siguiente panel para imprimir
+    private String concatenarFecha(){
+        return String.format("%s/%d/%d -- %d:%02d",diaSeleccionado,mesSeleccionado,anoSeleccionado,horaSeleccionada,minutosSeleccionados);
+    }
+    
     //Cambiamos el año desplazando con los botones
     private void butCambiarAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butCambiarAnoActionPerformed
 
@@ -593,10 +604,14 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
                 c.setFecha(LocalDate.of(anoSeleccionado, mesSeleccionado + 1, Integer.parseInt(diaSeleccionado)));
                 c.setHora(LocalTime.of(horaSeleccionada, minutosSeleccionados));
 
-                
+                ResumenCita rc = new ResumenCita((JFrame) SwingUtilities.getWindowAncestor(this), true,cliente.getDni(),(String)cmbBoxSeleccionarServicio.getSelectedItem(),concatenarFecha());
+                rc.setVisible(false);
+                rc.setSize(400, 320);
+                rc.mostrar();
+
                 LogicaCita.altaCita(c);
-                
-                JOptionPane.showMessageDialog(this, 
+
+                JOptionPane.showMessageDialog(this,
                         "Alta de cita correcta!!",
                         getName(),
                         JOptionPane.INFORMATION_MESSAGE);

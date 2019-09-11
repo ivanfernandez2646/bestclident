@@ -1,4 +1,4 @@
-
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open  the template in the editor.
@@ -6,22 +6,33 @@
 package vista.Citas;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author IVÁN-PC
  */
-public class ResumenCita extends javax.swing.JDialog implements Printable{
+public class ResumenCita extends javax.swing.JDialog implements Printable {
 
     /**
      * Creates new form ResumenCita
      */
-    public ResumenCita(java.awt.Frame parent, boolean modal) {
+    public ResumenCita(java.awt.Frame parent, boolean modal, String txtDni, String txtServicio, String txtFecha) {
         super(parent, modal);
         initComponents();
+        this.txtDni.setText(txtDni);
+        this.txtServicio.setText(txtServicio);
+        this.txtFecha.setText(txtFecha);
+    }
+
+    public void mostrar() {
+        setVisible(true);
     }
 
     /**
@@ -33,41 +44,106 @@ public class ResumenCita extends javax.swing.JDialog implements Printable{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        labCabecera = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        labFoto = new javax.swing.JLabel();
+        labDni = new javax.swing.JLabel();
+        txtDni = new javax.swing.JLabel();
+        labServicio = new javax.swing.JLabel();
+        txtServicio = new javax.swing.JLabel();
+        txtFecha = new javax.swing.JLabel();
+        butSalir = new javax.swing.JButton();
+        butImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Imprimir Recordatorio");
+        setMaximumSize(new java.awt.Dimension(400, 320));
+        setMinimumSize(new java.awt.Dimension(400, 320));
+        setName("Imprimir Recordatorio"); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(255, 51, 0));
+        labCabecera.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        labCabecera.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labCabecera.setText("RESUMEN CITA");
 
-        jLabel1.setText("jLabel1");
+        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+
+        labFoto.setForeground(new java.awt.Color(0, 0, 0));
+        labFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/LogoDental.png"))); // NOI18N
+
+        labDni.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        labDni.setForeground(new java.awt.Color(204, 204, 204));
+        labDni.setText("DNI:");
+
+        txtDni.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtDni.setForeground(new java.awt.Color(0, 0, 0));
+
+        labServicio.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        labServicio.setForeground(new java.awt.Color(204, 204, 204));
+        labServicio.setText("Fecha:");
+
+        txtServicio.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        txtServicio.setForeground(new java.awt.Color(0, 0, 0));
+
+        txtFecha.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        txtFecha.setForeground(new java.awt.Color(0, 0, 0));
+        txtFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtFecha.setText("FECHA");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 211, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(85, 85, 85)
-                    .addComponent(jLabel1)
-                    .addContainerGap(85, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labServicio)
+                            .addComponent(labDni))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtServicio, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                                .addGap(18, 18, 18))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(4, 4, 4)))
+                        .addComponent(labFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(42, 42, 42)
-                    .addComponent(jLabel1)
-                    .addContainerGap(42, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labFoto))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labDni)
+                            .addComponent(txtDni))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labServicio)
+                            .addComponent(txtServicio))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        butSalir.setText("SALIR");
+        butSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                butSalirActionPerformed(evt);
+            }
+        });
+
+        butImprimir.setText("IMPRIMIR");
+        butImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                butImprimirActionPerformed(evt);
             }
         });
 
@@ -77,87 +153,76 @@ public class ResumenCita extends javax.swing.JDialog implements Printable{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(183, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(butSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(butImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addContainerGap()
+                .addComponent(labCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(butImprimir)
+                    .addComponent(butSalir))
                 .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void butImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butImprimirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ResumenCita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ResumenCita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ResumenCita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ResumenCita.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            PrinterJob pjob = PrinterJob.getPrinterJob();
+            pjob.setPrintable((Printable) this);
+            pjob.printDialog();
+            pjob.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(ResumenCita.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_butImprimirActionPerformed
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ResumenCita dialog = new ResumenCita(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    private void butSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butSalirActionPerformed
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_butSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton butImprimir;
+    private javax.swing.JButton butSalir;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labCabecera;
+    private javax.swing.JLabel labDni;
+    private javax.swing.JLabel labFoto;
+    private javax.swing.JLabel labServicio;
+    private javax.swing.JLabel txtDni;
+    private javax.swing.JLabel txtFecha;
+    private javax.swing.JLabel txtServicio;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException {
-        
-        try{
-        PrinterJob ps;
-        }catch(PrinterException ex){
 
+        if (pageIndex > 0) {
+            return NO_SUCH_PAGE;
         }
+
+        Graphics2D g2d = (Graphics2D) graphics;
+        g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
+
+        jPanel1.printAll(g2d);
+        return PAGE_EXISTS;
     }
 }
