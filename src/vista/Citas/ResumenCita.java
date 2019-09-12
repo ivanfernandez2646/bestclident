@@ -76,13 +76,15 @@ public class ResumenCita extends javax.swing.JDialog implements Printable {
 
         txtDni.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtDni.setForeground(new java.awt.Color(0, 0, 0));
+        txtDni.setText("prueba");
 
         labServicio.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labServicio.setForeground(new java.awt.Color(204, 204, 204));
-        labServicio.setText("Fecha:");
+        labServicio.setText("Servicio:");
 
         txtServicio.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         txtServicio.setForeground(new java.awt.Color(0, 0, 0));
+        txtServicio.setText("prueba");
 
         txtFecha.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         txtFecha.setForeground(new java.awt.Color(0, 0, 0));
@@ -103,13 +105,10 @@ public class ResumenCita extends javax.swing.JDialog implements Printable {
                             .addComponent(labDni))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtServicio, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                                .addGap(18, 18, 18))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(4, 4, 4)))
-                        .addComponent(labFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                            .addComponent(txtServicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(

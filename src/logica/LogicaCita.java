@@ -51,7 +51,7 @@ public class LogicaCita {
             pst.setTime(4, Time.valueOf(c.getHora()));
             pst.executeUpdate();
         } catch (SQLException ex) {
-            throw new Exception("Error altaCita()", ex);
+            throw new Exception("Error altaCita()"+ex.getMessage(), ex);
         }
     }
 }

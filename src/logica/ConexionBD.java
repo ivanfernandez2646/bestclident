@@ -102,7 +102,7 @@ public class ConexionBD {
 
     private static void crearSPandTriggersDoctor() throws Exception {
 
-        String sqlDoctorProcBorrar = "select count(*) from information_schema.ROUTINES where ROUTINE_SCHEMA=\"bestclident\" and ROUTINE_TYPE=\"PROCEDURE\" and SPECIFIC_NAME = 'procComprobarDatosCita';";
+        String sqlDoctorProcBorrar = "select count(*) from information_schema.ROUTINES where ROUTINE_SCHEMA=\"bestclident\" and ROUTINE_TYPE=\"PROCEDURE\" and SPECIFIC_NAME = 'procComprobarDatosDoctor';";
         String sqlDoctorProc = "create procedure procComprobarDatosDoctor(IN edad tinyint, IN sueldo decimal(6,2))\n"
                 + "begin\n"
                 + "	if edad < 1 or edad > 120 then \n"
@@ -238,10 +238,6 @@ public class ConexionBD {
                 + "	if fecha <= curdate() then \n"
                 + "		signal sqlstate '45000' set message_text = 'ERROR. Fecha tiene que ser posterior a la fecha actual';\n"
                 + "	end if;\n"
-                + "\n"
-                + "	if hora < '09:30:00' or hora > '20:30:00' then\n"
-                + "		signal sqlstate '45001' set message_text = 'ERROR. Hora fuera de horario laboral';\n"
-                + "	end if;\n"
                 + "end;";
 
         String sqlCitaTrigg1Borrar = "select count(*) from information_schema.TRIGGERS where TRIGGER_SCHEMA = 'bestclident' and TRIGGER_NAME = 'comprobarCitaInsert';";
@@ -293,7 +289,7 @@ public class ConexionBD {
             }
 
         } catch (SQLException ex) {
-            throw new Exception("Error crearSPandTriggersServicio()", ex);
+            throw new Exception("Error crearSPandTriggersCita()", ex);
         }
     }
 

@@ -8,7 +8,6 @@ package vista.Citas;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -16,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.scripts.JO;
 import logica.CallBack;
 import logica.LogicaCita;
 import logica.LogicaServicio;
@@ -444,11 +444,14 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
             }
         }
     }
-    
-    private void limpiarCampos(){
+
+    private void limpiarCampos() {
         txtSeleccionarCliente.setText("");
         cmbBoxSeleccionarServicio.setSelectedIndex(-1);
-        rellenarCalendario();
+        tabSeleccionarFecha.clearSelection();
+        labDiaDisponible.setText("");
+        diaSeleccionado = null;
+        cambiarColorHoras();
     }
 
     //Permite recuperar todos los Servicios de la BBDD para mostrarlos en el
@@ -491,10 +494,10 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
     }//GEN-LAST:event_checkBoxMañanaTardeItemStateChanged
 
     //Concatena la fecha para enviar al siguiente panel para imprimir
-    private String concatenarFecha(){
-        return String.format("%s/%d/%d -- %d:%02d",diaSeleccionado,mesSeleccionado,anoSeleccionado,horaSeleccionada,minutosSeleccionados);
+    private String concatenarFecha() {
+        return String.format("%s/%d/%d -- %d:%02d", diaSeleccionado, mesSeleccionado, anoSeleccionado, horaSeleccionada, minutosSeleccionados);
     }
-    
+
     //Cambiamos el año desplazando con los botones
     private void butCambiarAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butCambiarAnoActionPerformed
 
@@ -604,19 +607,22 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
                 c.setFecha(LocalDate.of(anoSeleccionado, mesSeleccionado + 1, Integer.parseInt(diaSeleccionado)));
                 c.setHora(LocalTime.of(horaSeleccionada, minutosSeleccionados));
 
-                ResumenCita rc = new ResumenCita((JFrame) SwingUtilities.getWindowAncestor(this), true,cliente.getDni(),(String)cmbBoxSeleccionarServicio.getSelectedItem(),concatenarFecha());
-                rc.setVisible(false);
-                rc.setSize(400, 320);
-                rc.mostrar();
-
                 LogicaCita.altaCita(c);
 
-                JOptionPane.showMessageDialog(this,
+                int op = JOptionPane.showConfirmDialog(this,
                         "Alta de cita correcta!!",
                         getName(),
+                        JOptionPane.YES_NO_OPTION,
                         JOptionPane.INFORMATION_MESSAGE);
-                
-                cambiarColorHoras();
+
+                if (op == JOptionPane.YES_OPTION) {
+                    ResumenCita rc = new ResumenCita((JFrame) SwingUtilities.getWindowAncestor(this), true, cliente.getDni(), (String) cmbBoxSeleccionarServicio.getSelectedItem(), concatenarFecha());
+                    rc.setVisible(false);
+                    rc.setSize(400, 320);
+                    rc.mostrar();
+                }
+
+                limpiarCampos();
             } else {
                 System.out.println();
                 JOptionPane.showMessageDialog(this,
@@ -625,6 +631,10 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
                         JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception ex) {
+            JOptionPane.showConfirmDialog(this,
+                        ex.getMessage(),
+                        getName(),
+                        JOptionPane.WARNING_MESSAGE);
             System.out.println(ex.getMessage());
         }
 
