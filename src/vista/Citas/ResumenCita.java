@@ -9,10 +9,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
+import java.awt.print.PrinterAbortException;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
 
 /**
  *
@@ -22,6 +25,12 @@ public class ResumenCita extends javax.swing.JDialog implements Printable {
 
     /**
      * Creates new form ResumenCita
+     *
+     * @param parent
+     * @param modal
+     * @param txtDni
+     * @param txtServicio
+     * @param txtFecha
      */
     public ResumenCita(java.awt.Frame parent, boolean modal, String txtDni, String txtServicio, String txtFecha) {
         super(parent, modal);
@@ -187,6 +196,7 @@ public class ResumenCita extends javax.swing.JDialog implements Printable {
             pjob.setPrintable((Printable) this);
             pjob.printDialog();
             pjob.print();
+        } catch (PrinterAbortException ex) {
         } catch (PrinterException ex) {
             Logger.getLogger(ResumenCita.class.getName()).log(Level.SEVERE, null, ex);
         }

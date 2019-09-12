@@ -39,11 +39,11 @@ public class LogicaCita {
             throw new Exception("Error horariosDisponibles()", ex);
         }
     }
-    
-    public static void altaCita(Cita c) throws Exception{
-        
+
+    public static void altaCita(Cita c) throws Exception {
+
         String sql = "INSERT INTO cita VALUES(?,?,?,?)";
-        
+
         try (PreparedStatement pst = ConexionBD.getConn().prepareCall(sql)) {
             pst.setInt(1, c.getIdServicio());
             pst.setString(2, c.getDniCliente());
@@ -51,7 +51,7 @@ public class LogicaCita {
             pst.setTime(4, Time.valueOf(c.getHora()));
             pst.executeUpdate();
         } catch (SQLException ex) {
-            throw new Exception("Error altaCita()"+ex.getMessage(), ex);
+            throw new Exception("Error altaCita()\n" + ex.getMessage(), ex);
         }
     }
 }

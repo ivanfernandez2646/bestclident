@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import jdk.nashorn.internal.scripts.JO;
 import logica.CallBack;
 import logica.LogicaCita;
 import logica.LogicaServicio;
@@ -610,7 +609,8 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
                 LogicaCita.altaCita(c);
 
                 int op = JOptionPane.showConfirmDialog(this,
-                        "Alta de cita correcta!!",
+                        "Alta de cita correcta!!\n"
+                                + "¿Desea imprimir recordatorio?",
                         getName(),
                         JOptionPane.YES_NO_OPTION,
                         JOptionPane.INFORMATION_MESSAGE);
