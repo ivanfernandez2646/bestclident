@@ -5,10 +5,14 @@
  */
 package vista;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import logica.CallBack;
 import logica.ConexionBD;
 import logica.HiloReloj;
@@ -23,15 +27,17 @@ import vista.Servicios.Servicios_GUI;
  *
  * @author IVÁN-PC
  */
-public class ClinicaDental_GUI extends javax.swing.JFrame implements MetodosUtiles,CallBack {
+public class ClinicaDental_GUI extends javax.swing.JFrame implements MetodosUtiles, CallBack {
 
     private static HiloReloj hiloReloj;
-    
+
     private Principal_GUI panelPrincipal;
     private Doctores_GUI panelDoctores;
     private Servicios_GUI panelServicios;
     private Clientes_GUI panelClientes;
     private Citas_GUI panelCitas;
+
+    private JPanel panelSeleccionado;
 
     public ClinicaDental_GUI() {
         initComponents();
@@ -57,8 +63,8 @@ public class ClinicaDental_GUI extends javax.swing.JFrame implements MetodosUtil
         setVisible(true);
         labNombreUsuario.setText(ConexionBD.getConn().getMetaData().getUserName());
         hiloReloj = new HiloReloj(labFechaSistema);
-        menuPrincipal.setSelected(true);
         abrirMenuPrincipal();
+        System.out.println(menuBarClinica.isFocusOwner());
     }
 
     /**
@@ -74,11 +80,12 @@ public class ClinicaDental_GUI extends javax.swing.JFrame implements MetodosUtil
         labNombreUsuario = new javax.swing.JLabel();
         labFechaSistema = new javax.swing.JLabel();
         menuBarClinica = new javax.swing.JMenuBar();
-        menuPrincipal = new javax.swing.JMenu();
-        menuDoctores = new javax.swing.JMenu();
-        menuServicios = new javax.swing.JMenu();
-        menuClientes = new javax.swing.JMenu();
-        menuCitas = new javax.swing.JMenu();
+        menuClinica = new javax.swing.JMenu();
+        menuItemPrincipal = new javax.swing.JMenuItem();
+        menuItemDoctores = new javax.swing.JMenuItem();
+        menuItemServicios = new javax.swing.JMenuItem();
+        menuItemClientes = new javax.swing.JMenuItem();
+        menuItemCitas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("BestCliDent-Menú");
@@ -97,6 +104,7 @@ public class ClinicaDental_GUI extends javax.swing.JFrame implements MetodosUtil
         labNombreUsuario.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         labNombreUsuario.setForeground(new java.awt.Color(0, 0, 0));
         labNombreUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labNombreUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         labNombreUsuario.setOpaque(true);
 
         labFechaSistema.setBackground(new java.awt.Color(0, 255, 204));
@@ -105,45 +113,54 @@ public class ClinicaDental_GUI extends javax.swing.JFrame implements MetodosUtil
         labFechaSistema.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labFechaSistema.setOpaque(true);
 
-        menuPrincipal.setText("Principal");
-        menuPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuBarClinicaMouseEntered(evt);
-            }
-        });
-        menuBarClinica.add(menuPrincipal);
+        menuClinica.setText("CLINICA");
 
-        menuDoctores.setText("Doctores");
-        menuDoctores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuBarClinicaMouseEntered(evt);
+        menuItemPrincipal.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
+        menuItemPrincipal.setText("Principal");
+        menuItemPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuClinicaMousePressed(evt);
             }
         });
-        menuBarClinica.add(menuDoctores);
+        menuClinica.add(menuItemPrincipal);
 
-        menuServicios.setText("Servicios");
-        menuServicios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuBarClinicaMouseEntered(evt);
+        menuItemDoctores.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.ALT_MASK));
+        menuItemDoctores.setText("Doctores");
+        menuItemDoctores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuClinicaMousePressed(evt);
             }
         });
-        menuBarClinica.add(menuServicios);
+        menuClinica.add(menuItemDoctores);
 
-        menuClientes.setText("Clientes");
-        menuClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuBarClinicaMouseEntered(evt);
+        menuItemServicios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.ALT_MASK));
+        menuItemServicios.setText("Servicios");
+        menuItemServicios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuClinicaMousePressed(evt);
             }
         });
-        menuBarClinica.add(menuClientes);
+        menuClinica.add(menuItemServicios);
 
-        menuCitas.setText("Citas");
-        menuCitas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuBarClinicaMouseEntered(evt);
+        menuItemClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK));
+        menuItemClientes.setText("Clientes");
+        menuItemClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuClinicaMousePressed(evt);
             }
         });
-        menuBarClinica.add(menuCitas);
+        menuClinica.add(menuItemClientes);
+
+        menuItemCitas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, java.awt.event.InputEvent.ALT_MASK));
+        menuItemCitas.setText("Citas");
+        menuItemCitas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuClinicaMousePressed(evt);
+            }
+        });
+        menuClinica.add(menuItemCitas);
+
+        menuBarClinica.add(menuClinica);
 
         setJMenuBar(menuBarClinica);
 
@@ -176,80 +193,20 @@ public class ClinicaDental_GUI extends javax.swing.JFrame implements MetodosUtil
     }// </editor-fold>//GEN-END:initComponents
 
     private void cerrarPanelMostrado() {
-        if (menuPrincipal.isSelected()) {
-            panelPrincipal.setVisible(false);
-            panelPrincipal.removeAll();
-            this.remove(panelPrincipal);
-        } else if (menuDoctores.isSelected()) {
-            panelDoctores.setVisible(false);
-            panelDoctores.removeAll();
-            this.remove(panelDoctores);
-        } else if (menuServicios.isSelected()) {
-            panelServicios.setVisible(false);
-            panelServicios.removeAll();
-            this.remove(panelServicios);
-        }else if (menuClientes.isSelected()) {
-            panelClientes.setVisible(false);
-            panelClientes.removeAll();
-            this.remove(panelClientes);
-        }else if (menuCitas.isSelected()) {
-            panelCitas.setVisible(false);
-            panelCitas.removeAll();
-            this.remove(panelCitas);
-        }
+
+        panelSeleccionado.setVisible(false);
+        panelSeleccionado.removeAll();
+        this.remove(panelSeleccionado);
     }
 
     private void abrirMenuPrincipal() {
-        menuPrincipal.setSelected(true);
         panelPrincipal = new Principal_GUI();
         panelPrincipal.setVisible(false);
         panelPrincipal.setSize(785, 530);
         this.add(panelPrincipal);
+        panelSeleccionado = panelPrincipal;
         panelPrincipal.mostrar(this);
     }
-
-    private void menuBarClinicaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuBarClinicaMouseEntered
-
-        JMenu jMenuTMP = (JMenu) evt.getComponent();
-        cerrarPanelMostrado();
-        menuPrincipal.setSelected(false);
-        menuDoctores.setSelected(false);
-        menuServicios.setSelected(false);
-        menuClientes.setSelected(false);
-        menuCitas.setSelected(false);
-
-        if (jMenuTMP == menuPrincipal) {
-            abrirMenuPrincipal();
-        } else if (jMenuTMP == menuDoctores) {
-            menuDoctores.setSelected(true);
-            panelDoctores = new Doctores_GUI();
-            panelDoctores.setVisible(false);
-            panelDoctores.setSize(785, 530);
-            this.add(panelDoctores);
-            panelDoctores.mostrar();
-        } else if (jMenuTMP == menuServicios) {
-            menuServicios.setSelected(true);
-            panelServicios = new Servicios_GUI();
-            panelServicios.setVisible(false);
-            panelServicios.setSize(785, 530);
-            this.add(panelServicios);
-            panelServicios.mostrar();
-        } else if (jMenuTMP == menuClientes) {
-            menuClientes.setSelected(true);
-            panelClientes = new Clientes_GUI();
-            panelClientes.setVisible(false);
-            panelClientes.setSize(785, 530);
-            this.add(panelClientes);
-            panelClientes.mostrar();
-        } else if (jMenuTMP == menuCitas) {
-            menuCitas.setSelected(true);
-            panelCitas = new Citas_GUI();
-            panelCitas.setVisible(false);
-            panelCitas.setSize(785,530);
-            this.add(panelCitas);
-            panelCitas.mostrar();
-        }
-    }//GEN-LAST:event_menuBarClinicaMouseEntered
 
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -258,56 +215,55 @@ public class ClinicaDental_GUI extends javax.swing.JFrame implements MetodosUtil
         }
     }//GEN-LAST:event_formWindowClosing
 
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClinicaDental_GUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClinicaDental_GUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClinicaDental_GUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClinicaDental_GUI.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void menuClinicaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuClinicaMousePressed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ClinicaDental_GUI().setVisible(true);
-            }
-        });
-    }
+        cerrarPanelMostrado();
+
+        if (evt.getSource() == menuItemPrincipal) {
+            abrirMenuPrincipal();
+        } else if (evt.getSource() == menuItemDoctores) {
+            panelDoctores = new Doctores_GUI();
+            panelDoctores.setVisible(false);
+            panelDoctores.setSize(785, 530);
+            this.add(panelDoctores);
+            panelSeleccionado = panelDoctores;
+            panelDoctores.mostrar();
+        } else if (evt.getSource() == menuItemServicios) {
+            panelServicios = new Servicios_GUI();
+            panelServicios.setVisible(false);
+            panelServicios.setSize(785, 530);
+            this.add(panelServicios);
+            panelSeleccionado = panelServicios;
+            panelServicios.mostrar();
+        } else if (evt.getSource() == menuItemClientes) {
+            panelClientes = new Clientes_GUI();
+            panelClientes.setVisible(false);
+            panelClientes.setSize(785, 530);
+            this.add(panelClientes);
+            panelSeleccionado = panelClientes;
+            panelClientes.mostrar();
+        } else if (evt.getSource() == menuItemCitas) {
+            panelCitas = new Citas_GUI();
+            panelCitas.setVisible(false);
+            panelCitas.setSize(785, 530);
+            this.add(panelCitas);
+            panelSeleccionado = panelCitas;
+            panelCitas.mostrar();
+        }
+    }//GEN-LAST:event_menuClinicaMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel labFechaSistema;
     private javax.swing.JLabel labNombreUsuario;
     private javax.swing.JLabel labSuspesion;
     private javax.swing.JMenuBar menuBarClinica;
-    private javax.swing.JMenu menuCitas;
-    private javax.swing.JMenu menuClientes;
-    private javax.swing.JMenu menuDoctores;
-    private javax.swing.JMenu menuPrincipal;
-    private javax.swing.JMenu menuServicios;
+    private javax.swing.JMenu menuClinica;
+    private javax.swing.JMenuItem menuItemCitas;
+    private javax.swing.JMenuItem menuItemClientes;
+    private javax.swing.JMenuItem menuItemDoctores;
+    private javax.swing.JMenuItem menuItemPrincipal;
+    private javax.swing.JMenuItem menuItemServicios;
     // End of variables declaration//GEN-END:variables
 
 }

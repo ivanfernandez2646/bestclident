@@ -49,6 +49,8 @@ public class Clientes_GUI extends javax.swing.JPanel implements MetodosUtiles {
 
     public void mostrar() {
         setVisible(true);
+        txtDni.requestFocusInWindow();
+        this.requestFocus();
         mostrarListadoClientes();
     }
 
