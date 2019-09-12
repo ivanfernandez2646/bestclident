@@ -615,6 +615,8 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
                         "Alta de cita correcta!!",
                         getName(),
                         JOptionPane.INFORMATION_MESSAGE);
+                
+                cambiarColorHoras();
             } else {
                 System.out.println();
                 JOptionPane.showMessageDialog(this,

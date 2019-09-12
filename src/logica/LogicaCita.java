@@ -17,7 +17,7 @@ public class LogicaCita {
 
     public static List<String> horariosDisponibles(String fecha) throws Exception {
 
-        String sql = "SELECT TIME_FORMAT((SELECT hora FROM cita where fecha = ?), '%H:%i')";
+        String sql = "SELECT time_format(hora,'%H:%i') FROM cita WHERE fecha = ?;";
 
         List<String> tHorariosDisponibles = new ArrayList<>();
 
