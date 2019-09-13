@@ -59,7 +59,7 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         setMinimumSize(new java.awt.Dimension(785, 530));
 
         labCabecera.setBackground(new java.awt.Color(255, 153, 51));
-        labCabecera.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        labCabecera.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 24)); // NOI18N
         labCabecera.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labCabecera.setText("PRINCIPAL");
         labCabecera.setOpaque(true);
@@ -264,7 +264,7 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
 
         } else if (evt.getSource() == butCerrarSesion) {
             try {
-                if (salirYCerrarConexion(jFramePrincipal)) {
+                if (salirYCerrarConexion(jFramePrincipal,true)) {
                     ClinicaDental_GUI.getHiloReloj().stop();
                     ClinicaDental_LogIn cliLogin = new ClinicaDental_LogIn();
                     cliLogin.setVisible(false);
@@ -275,7 +275,7 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
             }
         } else if (evt.getSource() == butSalir) {
             try {
-                if (salirYCerrarConexion(jFramePrincipal)) {
+                if (salirYCerrarConexion(jFramePrincipal,false)) {
                     ClinicaDental_GUI.getHiloReloj().stop();
                 }
             } catch (Exception ex) {

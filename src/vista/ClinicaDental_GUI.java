@@ -225,7 +225,7 @@ public class ClinicaDental_GUI extends javax.swing.JFrame implements MetodosUtil
 
     //Cierra la conexión de la bbdd y detiene el hilo del reloj
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if (salirYCerrarConexion(this)) {
+        if (salirYCerrarConexion(this,false)) {
             hiloReloj.stop();
         }
     }//GEN-LAST:event_formWindowClosing

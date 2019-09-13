@@ -8,6 +8,7 @@ package vista.Citas;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
+import javax.swing.border.BevelBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
@@ -21,14 +22,20 @@ public class RenderizadorTablaCita extends DefaultTableCellRenderer {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
         if (column == 5 || column == 6) {
-            this.setBackground(Color.red);
+            this.setBackground(new Color(255, 0, 0, 65));
+            this.setEnabled(false);
+            this.setFocusable(false);
+            this.setVisible(false);
+            this.setBorder(noFocusBorder);
+        } else if ( table.getValueAt(row, column) == null ) {
+            this.setBackground(new Color(255, 0, 0, 65));
             this.setEnabled(false);
             this.setFocusable(false);
             this.setVisible(false);
             this.setBorder(noFocusBorder);
         } else {
             if (isSelected) {
-                this.setBackground(new Color(255,255,153));
+                this.setBackground(new Color(255, 255, 153));
             } else {
                 this.setBackground(Color.white);
             }
@@ -36,6 +43,7 @@ public class RenderizadorTablaCita extends DefaultTableCellRenderer {
             this.setEnabled(true);
             this.setFocusable(true);
         }
+        this.setBorder(new BevelBorder(CENTER));
         return this;
     }
 }
