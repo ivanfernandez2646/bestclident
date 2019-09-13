@@ -46,8 +46,8 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labb" min="-2" pref="154" max="-2" attributes="0"/>
-                          <Component id="butt" min="-2" pref="154" max="-2" attributes="0"/>
+                          <Component id="labEnviarEmails" min="-2" pref="154" max="-2" attributes="0"/>
+                          <Component id="butEnviarEmails" min="-2" pref="154" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -78,11 +78,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="butNotasRapidas" min="-2" pref="134" max="-2" attributes="0"/>
                   <Component id="butConsultarCitas" min="-2" pref="134" max="-2" attributes="0"/>
-                  <Component id="butt" min="-2" pref="134" max="-2" attributes="0"/>
+                  <Component id="butEnviarEmails" min="-2" pref="134" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labb" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labEnviarEmails" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labConsultarCitas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="labNotasRapidas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -145,7 +145,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="labb">
+    <Component class="javax.swing.JLabel" name="labEnviarEmails">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Ebrima" size="14" style="1"/>
@@ -154,7 +154,7 @@
         <Property name="text" type="java.lang.String" value="gf"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="butt">
+    <Component class="javax.swing.JButton" name="butEnviarEmails">
       <Events>
         <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="butFuncionalesMouseEntered"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>

@@ -48,8 +48,8 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         butNotasRapidas = new javax.swing.JButton();
         labConsultarCitas = new javax.swing.JLabel();
         butConsultarCitas = new javax.swing.JButton();
-        labb = new javax.swing.JLabel();
-        butt = new javax.swing.JButton();
+        labEnviarEmails = new javax.swing.JLabel();
+        butEnviarEmails = new javax.swing.JButton();
         labCerrarSesion = new javax.swing.JLabel();
         butCerrarSesion = new javax.swing.JButton();
         labSalir = new javax.swing.JLabel();
@@ -94,16 +94,16 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
             }
         });
 
-        labb.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
-        labb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labb.setText("gf");
+        labEnviarEmails.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
+        labEnviarEmails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labEnviarEmails.setText("gf");
 
-        butt.addMouseListener(new java.awt.event.MouseAdapter() {
+        butEnviarEmails.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 butFuncionalesMouseEntered(evt);
             }
         });
-        butt.addActionListener(new java.awt.event.ActionListener() {
+        butEnviarEmails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 butFuncionalesActionPerformed(evt);
             }
@@ -161,8 +161,8 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
                                 .addComponent(labConsultarCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labb, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(butt, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labEnviarEmails, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(butEnviarEmails, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -185,10 +185,10 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(butNotasRapidas, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(butConsultarCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(butt, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(butEnviarEmails, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labb)
+                    .addComponent(labEnviarEmails)
                     .addComponent(labConsultarCitas)
                     .addComponent(labNotasRapidas))
                 .addGap(18, 18, 18)
@@ -208,8 +208,8 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         butNotasRapidas.setIcon(new ImageIcon(getClass().getResource("/img/iconsButtons/notasRapidas.png")));
         labConsultarCitas.setText("CONSULTAR CITAS");
         butConsultarCitas.setIcon(new ImageIcon(getClass().getResource("/img/iconsButtons/consultarCitas.png")));
-        //labb.setText("SALIR");
-        //butt.setIcon(new ImageIcon(getClass().getResource("/img/iconsButtons/salir.png")));
+        labEnviarEmails.setText("ENVIAR EMAILS");
+        butEnviarEmails.setIcon(new ImageIcon(getClass().getResource("/img/iconsButtons/enviarEmails.png")));
         labCerrarSesion.setText("CERRAR SESIÓN");
         butCerrarSesion.setIcon(new ImageIcon(getClass().getResource("/img/iconsButtons/cerrarSesion.png")));
         labSalir.setText("SALIR");
@@ -223,8 +223,8 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         butNotasRapidas.setVisible(false);
         labConsultarCitas.setVisible(false);
         butConsultarCitas.setVisible(false);
-        labb.setVisible(false);
-        butt.setVisible(false);
+        labEnviarEmails.setVisible(false);
+        butEnviarEmails.setVisible(false);
         labCerrarSesion.setVisible(false);
         butCerrarSesion.setVisible(false);
         labSalir.setVisible(false);
@@ -238,14 +238,13 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         butNotasRapidas.setVisible(true);
         labConsultarCitas.setVisible(true);
         butConsultarCitas.setVisible(true);
-        labb.setVisible(true);
-        butt.setVisible(true);
+        labEnviarEmails.setVisible(true);
+        butEnviarEmails.setVisible(true);
         labCerrarSesion.setVisible(true);
         butCerrarSesion.setVisible(true);
         labSalir.setVisible(true);
         butSalir.setVisible(true);
     }
-
 
     //Acciones de los botones funcionales
     private void butFuncionalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butFuncionalesActionPerformed
@@ -260,11 +259,17 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
             panelNotasRapidas.mostrar();
         } else if (evt.getSource() == butConsultarCitas) {
 
-        } else if (evt.getSource() == butt) {
-
+        } else if (evt.getSource() == butEnviarEmails) {
+            ocultarFuncionalidades();
+            jFramePrincipal.getMenuBarClinica().setVisible(false);
+            EnviarEmails_GUI panelEnviarEmails = new EnviarEmails_GUI(this);
+            panelEnviarEmails.setSize(785, 530);
+            panelEnviarEmails.setVisible(false);
+            this.add(panelEnviarEmails);
+            panelEnviarEmails.mostrar();
         } else if (evt.getSource() == butCerrarSesion) {
             try {
-                if (salirYCerrarConexion(jFramePrincipal,true)) {
+                if (salirYCerrarConexion(jFramePrincipal, true)) {
                     ClinicaDental_GUI.getHiloReloj().stop();
                     ClinicaDental_LogIn cliLogin = new ClinicaDental_LogIn();
                     cliLogin.setVisible(false);
@@ -275,7 +280,7 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
             }
         } else if (evt.getSource() == butSalir) {
             try {
-                if (salirYCerrarConexion(jFramePrincipal,false)) {
+                if (salirYCerrarConexion(jFramePrincipal, false)) {
                     ClinicaDental_GUI.getHiloReloj().stop();
                 }
             } catch (Exception ex) {
@@ -293,15 +298,15 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton butCerrarSesion;
     private javax.swing.JButton butConsultarCitas;
+    private javax.swing.JButton butEnviarEmails;
     private javax.swing.JButton butNotasRapidas;
     private javax.swing.JButton butSalir;
-    private javax.swing.JButton butt;
     private javax.swing.JLabel labCabecera;
     private javax.swing.JLabel labCerrarSesion;
     private javax.swing.JLabel labConsultarCitas;
+    private javax.swing.JLabel labEnviarEmails;
     private javax.swing.JLabel labNotasRapidas;
     private javax.swing.JLabel labSalir;
-    private javax.swing.JLabel labb;
     // End of variables declaration//GEN-END:variables
 
     @Override

@@ -50,6 +50,7 @@ public class NotasRapidas_GUI extends javax.swing.JPanel {
         labCabecera.setForeground(new java.awt.Color(0, 0, 0));
         labCabecera.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labCabecera.setText("NOTAS RÁPIDAS");
+        labCabecera.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         txtNotasRapidas.setColumns(20);
         txtNotasRapidas.setRows(5);

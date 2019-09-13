@@ -21,38 +21,35 @@ import javax.mail.internet.MimeMessage;
  */
 public class EnviarGMail {
 
-    public static void enviarConGMail(String destinatario, String asunto, String cuerpo) {
-        try {
-            String host = "smtp.gmail.com";
-            String from = "bestclident@gmail.com";
-            String pass = "bestclident1234";
-            Properties props = System.getProperties();
-            props.put("mail.smtp.starttls.enable", "true");
-            props.put("mail.smtp.host", host);
-            props.put("mail.smtp.user", from);
-            props.put("mail.smtp.password", pass);
-            props.put("mail.smtp.port", "587");
-            props.put("mail.smtp.auth", "true");
-            props.put("mail.debug", "true");
+    public static void enviarConGMail(String destinatario, String asunto, String cuerpo) throws Exception {
 
-            Session session = Session.getDefaultInstance(props, new GMailAuthenticator(from, pass));
-            MimeMessage message = new MimeMessage(session);
-            Address fromAddress = new InternetAddress(from);
-            Address toAddress = new InternetAddress(destinatario);
+        String host = "smtp.gmail.com";
+        String from = "bestclident@gmail.com";
+        String pass = "bestclident1234";
+        Properties props = System.getProperties();
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.user", from);
+        props.put("mail.smtp.password", pass);
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.debug", "true");
 
-            message.setFrom(fromAddress);
-            message.setRecipient(Message.RecipientType.TO, toAddress);
+        Session session = Session.getDefaultInstance(props, new GMailAuthenticator(from, pass));
+        MimeMessage message = new MimeMessage(session);
+        Address fromAddress = new InternetAddress(from);
+        Address toAddress = new InternetAddress(destinatario);
 
-            message.setSubject(asunto);
-            message.setText(cuerpo);
-            Transport transport = session.getTransport("smtp");
-            transport.connect(host, from, pass);
-            message.saveChanges();
-            Transport.send(message);
-            transport.close();
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+        message.setFrom(fromAddress);
+        message.setRecipient(Message.RecipientType.TO, toAddress);
+
+        message.setSubject(asunto);
+        message.setText(cuerpo);
+        Transport transport = session.getTransport("smtp");
+        transport.connect(host, from, pass);
+        message.saveChanges();
+        Transport.send(message);
+        transport.close();
     }
 
     public static String asuntoBienvenida() {
@@ -65,7 +62,7 @@ public class EnviarGMail {
                 + "Este mensaje ha sido generado aleatoriarmente. No responder a él."
                 + "Cualquier duda puede contactarnos en bestclident@gmail.com";
     }
-    
+
     static class GMailAuthenticator extends Authenticator {
 
         String user;
