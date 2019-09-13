@@ -5,7 +5,9 @@
  */
 package vista.Principal;
 
+import java.awt.Cursor;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import logica.CallBack;
 import logica.MetodosUtiles;
 import vista.ClinicaDental_GUI;
@@ -15,20 +17,19 @@ import vista.ClinicaDental_LogIn;
  *
  * @author IVÁN-PC
  */
-public class Principal_GUI extends javax.swing.JPanel implements CallBack, MetodosUtiles{
+public class Principal_GUI extends javax.swing.JPanel implements CallBack, MetodosUtiles {
 
     /**
      * Creates new form Principal_GUI
      */
     private ClinicaDental_GUI jFramePrincipal;
-    
-    
+
     public Principal_GUI() {
         initComponents();
         rellenarMenuPrinicipal();
     }
-    
-    public void mostrar(ClinicaDental_GUI jFramePrincipal){
+
+    public void mostrar(ClinicaDental_GUI jFramePrincipal) {
         setVisible(true);
         this.jFramePrincipal = jFramePrincipal;
     }
@@ -67,6 +68,11 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labNotasRapidas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labNotasRapidas.setText("fg");
 
+        butNotasRapidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                butFuncionalesMouseEntered(evt);
+            }
+        });
         butNotasRapidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 butFuncionalesActionPerformed(evt);
@@ -77,6 +83,11 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labConsultarCitas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labConsultarCitas.setText("fg");
 
+        butConsultarCitas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                butFuncionalesMouseEntered(evt);
+            }
+        });
         butConsultarCitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 butFuncionalesActionPerformed(evt);
@@ -87,6 +98,11 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labb.setText("gf");
 
+        butt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                butFuncionalesMouseEntered(evt);
+            }
+        });
         butt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 butFuncionalesActionPerformed(evt);
@@ -97,6 +113,11 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labCerrarSesion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labCerrarSesion.setText("fg");
 
+        butCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                butFuncionalesMouseEntered(evt);
+            }
+        });
         butCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 butFuncionalesActionPerformed(evt);
@@ -107,6 +128,11 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labSalir.setText("fg");
 
+        butSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                butFuncionalesMouseEntered(evt);
+            }
+        });
         butSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 butFuncionalesActionPerformed(evt);
@@ -189,8 +215,9 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labSalir.setText("SALIR");
         butSalir.setIcon(new ImageIcon(getClass().getResource("/img/iconsButtons/salir.png")));
     }
-    
-    private void ocultarFuncionalidades(){
+
+    //Para ocultar las funcionalidades (JButton, JLabel...)
+    private void ocultarFuncionalidades() {
         labCabecera.setVisible(false);
         labNotasRapidas.setVisible(false);
         butNotasRapidas.setVisible(false);
@@ -203,8 +230,9 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labSalir.setVisible(false);
         butSalir.setVisible(false);
     }
-    
-    private void mostrarFuncionalidades(){
+
+    //Para mostrar las funcionalidades (JButton, JLabel...)
+    private void mostrarFuncionalidades() {
         labCabecera.setVisible(true);
         labNotasRapidas.setVisible(true);
         butNotasRapidas.setVisible(true);
@@ -217,8 +245,9 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labSalir.setVisible(true);
         butSalir.setVisible(true);
     }
-    
-    
+
+
+    //Acciones de los botones funcionales
     private void butFuncionalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butFuncionalesActionPerformed
 
         if (evt.getSource() == butNotasRapidas) {
@@ -229,11 +258,11 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
             panelNotasRapidas.setVisible(false);
             this.add(panelNotasRapidas);
             panelNotasRapidas.mostrar();
-        } else if(evt.getSource() == butConsultarCitas){
-            
-        } else if(evt.getSource() == butt){
-            
-        }else if (evt.getSource() == butCerrarSesion) {
+        } else if (evt.getSource() == butConsultarCitas) {
+
+        } else if (evt.getSource() == butt) {
+
+        } else if (evt.getSource() == butCerrarSesion) {
             try {
                 if (salirYCerrarConexion(jFramePrincipal)) {
                     ClinicaDental_GUI.getHiloReloj().stop();
@@ -246,13 +275,19 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
             }
         } else if (evt.getSource() == butSalir) {
             try {
-                if(salirYCerrarConexion(jFramePrincipal)){
+                if (salirYCerrarConexion(jFramePrincipal)) {
                     ClinicaDental_GUI.getHiloReloj().stop();
                 }
             } catch (Exception ex) {
             }
         }
     }//GEN-LAST:event_butFuncionalesActionPerformed
+
+    //Para poner el cursor en forma de mano cuando pasamos por encima de un botón funcional
+    private void butFuncionalesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_butFuncionalesMouseEntered
+
+        ((JButton) evt.getSource()).setCursor(new Cursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_butFuncionalesMouseEntered
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

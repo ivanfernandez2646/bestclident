@@ -126,6 +126,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="butNotasRapidas">
       <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="butFuncionalesMouseEntered"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
       </Events>
     </Component>
@@ -140,6 +141,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="butConsultarCitas">
       <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="butFuncionalesMouseEntered"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
       </Events>
     </Component>
@@ -154,6 +156,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="butt">
       <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="butFuncionalesMouseEntered"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
       </Events>
     </Component>
@@ -168,6 +171,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="butCerrarSesion">
       <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="butFuncionalesMouseEntered"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
       </Events>
     </Component>
@@ -182,6 +186,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="butSalir">
       <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="butFuncionalesMouseEntered"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="butFuncionalesActionPerformed"/>
       </Events>
     </Component>
