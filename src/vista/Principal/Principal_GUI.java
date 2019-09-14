@@ -68,6 +68,7 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labNotasRapidas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labNotasRapidas.setText("fg");
 
+        butNotasRapidas.setBackground(new java.awt.Color(255, 102, 102));
         butNotasRapidas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 butFuncionalesMouseEntered(evt);
@@ -83,6 +84,7 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labConsultarCitas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labConsultarCitas.setText("fg");
 
+        butConsultarCitas.setBackground(new java.awt.Color(204, 255, 204));
         butConsultarCitas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 butFuncionalesMouseEntered(evt);
@@ -98,6 +100,7 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
         labEnviarEmails.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labEnviarEmails.setText("gf");
 
+        butEnviarEmails.setBackground(new java.awt.Color(255, 255, 153));
         butEnviarEmails.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 butFuncionalesMouseEntered(evt);
@@ -258,7 +261,13 @@ public class Principal_GUI extends javax.swing.JPanel implements CallBack, Metod
             this.add(panelNotasRapidas);
             panelNotasRapidas.mostrar();
         } else if (evt.getSource() == butConsultarCitas) {
-
+            ocultarFuncionalidades();
+            jFramePrincipal.getMenuBarClinica().setVisible(false);
+            ConsultarCitas_GUI panelConsultarCitas = new ConsultarCitas_GUI(this);
+            panelConsultarCitas.setSize(785, 530);
+            panelConsultarCitas.setVisible(false);
+            this.add(panelConsultarCitas);
+            panelConsultarCitas.mostrar();
         } else if (evt.getSource() == butEnviarEmails) {
             ocultarFuncionalidades();
             jFramePrincipal.getMenuBarClinica().setVisible(false);
