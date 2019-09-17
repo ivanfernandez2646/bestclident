@@ -14,15 +14,17 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
 import logica.CallBack;
 import logica.LogicaCita;
 import logica.LogicaServicio;
 import logica.MetodosUtiles;
+//import modelo.CalendarioElegirFecha;
 import modelo.Cita;
 import modelo.Cliente;
 import modelo.Servicio;
+//import modelo.CalendarioElegirFecha.MESES;
 import vista.Clientes.ElegirCliente_GUI;
+import vista.ElegirFechaPanel_Citas;
 
 /**
  *
@@ -30,22 +32,14 @@ import vista.Clientes.ElegirCliente_GUI;
  */
 public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, CallBack {
 
-    private enum MESES {
-        Enero, Febrero, Marzo, Abril, Mayo, Junio, Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre
-    };
-
-    //fdgn
     private DefaultComboBoxModel<String> comboModel;
-    private DefaultTableModel tabModel;
 
     //Para ayudarme a saber que RadioButton está seleccionado de las horas
     private int horaSeleccionada;
     private int minutosSeleccionados;
 
-    //ATRIBUTOS DE CLASE PARA AYUDARME AL MANEJO DEL CALENDARIO
-    private int anoSeleccionado;
-    private int mesSeleccionado;
-    private String diaSeleccionado;
+    //ATRIBUTO DE CLASE PARA AYUDARME AL MANEJO DEL CALENDARIO
+    private ElegirFechaPanel_Citas calendario;
 
     //Atributos de otras clases para ayudarme al manejo de los servicios y clientes
     private Cliente cliente;
@@ -55,31 +49,17 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
         initComponents();
         establecerHoras();
         comboModel = new DefaultComboBoxModel();
-        tabModel = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-
-        };
-        tabModel.setColumnIdentifiers(new Object[]{"L", "M", "X", "J",
-            "V", "S", "D"});
-        tabSeleccionarFecha.setModel(tabModel);
-        labAno.setText(String.valueOf(LocalDate.now().getYear()));
-        labMes.setText(MESES.values()[LocalDate.now().getMonthValue() - 1].toString());
-        anoSeleccionado = Integer.parseInt(labAno.getText());
-        mesSeleccionado = LocalDate.now().getMonthValue() - 1;
-        diaSeleccionado = null;
         horaSeleccionada = -1;
         minutosSeleccionados = -1;
-        RenderizadorTablaCita cambiarColorCeldas = new RenderizadorTablaCita();
-        tabSeleccionarFecha.setDefaultRenderer(Object.class, cambiarColorCeldas);
-        rellenarCalendario();
-
+        
     }
 
     public void mostrar() {
         setVisible(true);
+        calendario = new ElegirFechaPanel_Citas();
+        calendario.mostrar(this);
+        this.add(calendario);
+        calendario.rellenarCalendario();
     }
 
     /**
@@ -92,8 +72,6 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
     private void initComponents() {
 
         buttonGroupHoras = new javax.swing.ButtonGroup();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         labCabecera = new javax.swing.JLabel();
         panelSeleccionarClienteYServicio = new javax.swing.JPanel();
         labSeleccionarCliente = new javax.swing.JLabel();
@@ -101,16 +79,6 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
         butSeleccionarCliente = new javax.swing.JButton();
         labSeleccionarServicio = new javax.swing.JLabel();
         cmbBoxSeleccionarServicio = new javax.swing.JComboBox<>();
-        panelFecha = new javax.swing.JPanel();
-        butMesAnterior = new javax.swing.JButton();
-        labMes = new javax.swing.JLabel();
-        butMesPosterior = new javax.swing.JButton();
-        butAnoAnterior = new javax.swing.JButton();
-        labAno = new javax.swing.JLabel();
-        butAnoPosterior = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabSeleccionarFecha = new javax.swing.JTable();
-        labDiaDisponible = new javax.swing.JLabel();
         panelHora = new javax.swing.JPanel();
         checkBoxMañanaTarde = new javax.swing.JCheckBox();
         rBut1 = new javax.swing.JRadioButton();
@@ -119,26 +87,13 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
         rBut4 = new javax.swing.JRadioButton();
         butConfirmar = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         setMaximumSize(new java.awt.Dimension(785, 530));
         setMinimumSize(new java.awt.Dimension(785, 530));
         setName("Citas"); // NOI18N
         setPreferredSize(new java.awt.Dimension(785, 530));
 
         labCabecera.setBackground(new java.awt.Color(0, 153, 153));
-        labCabecera.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 24)); // NOI18N
+        labCabecera.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 24)); // NOI18N
         labCabecera.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labCabecera.setText("CITAS");
         labCabecera.setOpaque(true);
@@ -202,112 +157,6 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
                     .addComponent(labSeleccionarServicio)
                     .addComponent(cmbBoxSeleccionarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
-        );
-
-        panelFecha.setBorder(javax.swing.BorderFactory.createTitledBorder("Fecha"));
-
-        butMesAnterior.setText("<");
-        butMesAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butCambiarMesActionPerformed(evt);
-            }
-        });
-
-        labMes.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        labMes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labMes.setText("Mes");
-
-        butMesPosterior.setText(">");
-        butMesPosterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butCambiarMesActionPerformed(evt);
-            }
-        });
-
-        butAnoAnterior.setText("<");
-        butAnoAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butCambiarAnoActionPerformed(evt);
-            }
-        });
-
-        labAno.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        labAno.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labAno.setText("Año");
-
-        butAnoPosterior.setText(">");
-        butAnoPosterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                butCambiarAnoActionPerformed(evt);
-            }
-        });
-
-        tabSeleccionarFecha.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        tabSeleccionarFecha.setCellSelectionEnabled(true);
-        tabSeleccionarFecha.setSelectionForeground(new java.awt.Color(75, 110, 175));
-        tabSeleccionarFecha.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tabSeleccionarFecha.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tabSeleccionarFecha.getTableHeader().setResizingAllowed(false);
-        tabSeleccionarFecha.getTableHeader().setReorderingAllowed(false);
-        tabSeleccionarFecha.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                tabSeleccionarFechaMousePressed(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tabSeleccionarFecha);
-
-        labDiaDisponible.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-
-        javax.swing.GroupLayout panelFechaLayout = new javax.swing.GroupLayout(panelFecha);
-        panelFecha.setLayout(panelFechaLayout);
-        panelFechaLayout.setHorizontalGroup(
-            panelFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelFechaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGroup(panelFechaLayout.createSequentialGroup()
-                            .addComponent(butMesAnterior)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(labMes, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(butMesPosterior)
-                            .addGap(33, 33, 33)
-                            .addComponent(butAnoAnterior)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(labAno, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(butAnoPosterior)))
-                    .addComponent(labDiaDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelFechaLayout.setVerticalGroup(
-            panelFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFechaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labAno)
-                    .addComponent(butMesPosterior)
-                    .addComponent(butMesAnterior)
-                    .addComponent(labMes)
-                    .addComponent(butAnoPosterior)
-                    .addComponent(butAnoAnterior))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(labDiaDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
 
         panelHora.setBorder(javax.swing.BorderFactory.createTitledBorder("Hora"));
@@ -408,8 +257,7 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
                             .addComponent(labCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(panelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(panelHora, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(butConfirmar, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -423,33 +271,17 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
                 .addGap(18, 18, 18)
                 .addComponent(panelSeleccionarClienteYServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(butConfirmar))
-                    .addComponent(panelFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addComponent(panelHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(butConfirmar)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    //Limpia la tabla
-    private void limpiarTabla() {
-        int cantidadFilas = tabModel.getRowCount();
-
-        if (cantidadFilas != 0) {
-            for (int i = cantidadFilas - 1; i >= 0; i--) {
-                tabModel.removeRow(i);
-            }
-        }
-    }
 
     private void limpiarCampos() {
         txtSeleccionarCliente.setText("");
         cmbBoxSeleccionarServicio.setSelectedIndex(-1);
-        tabSeleccionarFecha.clearSelection();
-        labDiaDisponible.setText("");
-        diaSeleccionado = null;
+        calendario.limpiarCampos();
         cambiarColorHoras();
     }
 
@@ -487,70 +319,15 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
     private void checkBoxMañanaTardeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_checkBoxMañanaTardeItemStateChanged
         establecerHoras();
 
-        if (diaSeleccionado != null) {
+        if (calendario.getDiaSeleccionado() != null) {
             cambiarColorHoras();
         }
     }//GEN-LAST:event_checkBoxMañanaTardeItemStateChanged
 
     //Concatena la fecha para enviar al siguiente panel para imprimir
     private String concatenarFecha() {
-        return String.format("%s/%d/%d -- %d:%02d", diaSeleccionado, mesSeleccionado, anoSeleccionado, horaSeleccionada, minutosSeleccionados);
+        return String.format("%s/%d/%d -- %d:%02d", calendario.getDiaSeleccionado(), calendario.getMesSeleccionado(), calendario.getAnoSeleccionado(), horaSeleccionada, minutosSeleccionados);
     }
-
-    //Cambiamos el año desplazando con los botones
-    private void butCambiarAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butCambiarAnoActionPerformed
-
-        anoSeleccionado = Integer.parseInt(labAno.getText());
-
-        if (evt.getSource() == butAnoAnterior) {
-            anoSeleccionado = anoSeleccionado - 1;
-        } else if (evt.getSource() == butAnoPosterior) {
-            anoSeleccionado = anoSeleccionado + 1;
-        }
-        labAno.setText(String.valueOf(anoSeleccionado));
-        rellenarCalendario();
-    }//GEN-LAST:event_butCambiarAnoActionPerformed
-
-    //Cambiamos el mes desplazando con los botones
-    private void butCambiarMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_butCambiarMesActionPerformed
-
-        mesSeleccionado = MESES.valueOf(labMes.getText()).ordinal();
-
-        if (evt.getSource() == butMesAnterior && mesSeleccionado > 0) {
-            mesSeleccionado = mesSeleccionado - 1;
-        } else if (evt.getSource() == butMesPosterior && mesSeleccionado < MESES.values().length - 1) {
-            mesSeleccionado = mesSeleccionado + 1;
-        } else {
-
-            if (evt.getSource() == butMesAnterior && mesSeleccionado == 0) {
-                mesSeleccionado = MESES.values()[MESES.values().length - 1].ordinal();
-            } else if (evt.getSource() == butMesPosterior && mesSeleccionado == MESES.values().length - 1) {
-                mesSeleccionado = 0;
-            }
-        }
-        labMes.setText(MESES.values()[mesSeleccionado].toString());
-        rellenarCalendario();
-    }//GEN-LAST:event_butCambiarMesActionPerformed
-
-    //Nos dice si el día está disponible o no
-    private void tabSeleccionarFechaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabSeleccionarFechaMousePressed
-
-        //Sacamaos el día que hay seleccionado
-        diaSeleccionado = tabSeleccionarFecha.getValueAt(tabSeleccionarFecha.getSelectedRow(), tabSeleccionarFecha.getSelectedColumn()) == null ? null
-                : String.valueOf(tabSeleccionarFecha.getValueAt(tabSeleccionarFecha.getSelectedRow(), tabSeleccionarFecha.getSelectedColumn()));
-
-        //Comprobamos si es válido, es decir si está en la columna de los fines de Semana o si es un día nulo perteneciente a otro mes
-        //De esta manera conseguimos saber si el día es válido o no.
-        if (tabSeleccionarFecha.getSelectedColumn() != 5 && tabSeleccionarFecha.getSelectedColumn() != 6 && diaSeleccionado != null) {
-            labDiaDisponible.setText("Día Seleccionado: " + String.valueOf(diaSeleccionado));
-            cambiarColorHoras();
-        } else {
-            labDiaDisponible.setText("Día No Disponible!!");
-            diaSeleccionado = null;
-            cambiarColorHoras();
-        }
-
-    }//GEN-LAST:event_tabSeleccionarFechaMousePressed
 
     private String comprobarCamposObligatorios() {
 
@@ -564,7 +341,7 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
             datosObligatorios += "\nServicio";
         }
 
-        if (diaSeleccionado == null) {
+        if (calendario.getDiaSeleccionado() == null) {
             datosObligatorios += "\nDía No Seleccionado o no disponible";
         }
 
@@ -603,7 +380,7 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
 
                 c.setIdServicio(servicio.getId());
                 c.setDniCliente(cliente.getDni());
-                c.setFecha(LocalDate.of(anoSeleccionado, mesSeleccionado + 1, Integer.parseInt(diaSeleccionado)));
+                c.setFecha(LocalDate.of(calendario.getAnoSeleccionado(), calendario.getMesSeleccionado() + 1, Integer.parseInt(calendario.getDiaSeleccionado())));
                 c.setHora(LocalTime.of(horaSeleccionada, minutosSeleccionados));
 
                 LogicaCita.altaCita(c);
@@ -676,15 +453,15 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
     }
 
     //Cambiar color horas
-    private void cambiarColorHoras() {
+    public void cambiarColorHoras() {
 
         try {
 
-            if (diaSeleccionado != null) {
-                String anoSelec = String.valueOf(this.anoSeleccionado);
-                String mesSelec = String.valueOf(this.mesSeleccionado + 1);
+            if (calendario.getDiaSeleccionado() != null) {
+                String anoSelec = String.valueOf(calendario.getAnoSeleccionado());
+                String mesSelec = String.valueOf(calendario.getMesSeleccionado() + 1);
 
-                String fecha = anoSelec + "-" + mesSelec + "-" + diaSeleccionado;
+                String fecha = anoSelec + "-" + mesSelec + "-" + calendario.getDiaSeleccionado();
 
                 List<String> tDiasDisponibles = LogicaCita.horariosDisponibles(fecha);
 
@@ -755,41 +532,6 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
 
     }
 
-    //Rellenar calendario con días
-    private void rellenarCalendario() {
-
-        limpiarTabla();
-
-        //Sumamos uno ya que por el enumerado el mes va disminuido en 1
-        LocalDate fechaInicial = LocalDate.of(anoSeleccionado, mesSeleccionado + 1, 1);
-
-        //Restamos uno para condicionarlo al JTable
-        int diaInicialFechaSeleccionada = fechaInicial.getDayOfWeek().getValue() - 1;
-
-        int fila = 0;
-        int dia = 1;
-        while (fechaInicial.getMonth().getValue() == mesSeleccionado + 1) {
-            tabModel.addRow(new Object[7]);
-
-            int columna = diaInicialFechaSeleccionada;
-            while (columna != 7) {
-
-                if (fechaInicial.getMonth().getValue() == mesSeleccionado + 1) {
-                    tabModel.setValueAt(dia, fila, columna);
-
-                } else {
-                    break;
-                }
-                fechaInicial = fechaInicial.plusDays(1);
-                dia++;
-                columna++;
-            }
-            diaInicialFechaSeleccionada = 0;
-            fila++;
-        }
-        tabSeleccionarFecha.setModel(tabModel);
-    }
-
     //Para recuperar el Cliente al buscarlo en el JDialog
     @Override
     public void panelDeLlamada(Object o) {
@@ -797,37 +539,30 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
         if (o instanceof Cliente) {
             cliente = (Cliente) o;
             txtSeleccionarCliente.setText(cliente.getDni() + ". " + cliente.getNombre());
-        }
+        }        
+    }
+    
+    //Panel de llamada, sirve para cuando seleccionamos un día en el JTable llamar al método cambiarColorHoras()
+    @Override
+    public void panelDeLlamada() {
+        cambiarColorHoras();
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton butAnoAnterior;
-    private javax.swing.JButton butAnoPosterior;
     private javax.swing.JButton butConfirmar;
-    private javax.swing.JButton butMesAnterior;
-    private javax.swing.JButton butMesPosterior;
     private javax.swing.JButton butSeleccionarCliente;
     private javax.swing.ButtonGroup buttonGroupHoras;
     private javax.swing.JCheckBox checkBoxMañanaTarde;
     private javax.swing.JComboBox<String> cmbBoxSeleccionarServicio;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JLabel labAno;
     private javax.swing.JLabel labCabecera;
-    private javax.swing.JLabel labDiaDisponible;
-    private javax.swing.JLabel labMes;
     private javax.swing.JLabel labSeleccionarCliente;
     private javax.swing.JLabel labSeleccionarServicio;
-    private javax.swing.JPanel panelFecha;
     private javax.swing.JPanel panelHora;
     private javax.swing.JPanel panelSeleccionarClienteYServicio;
     private javax.swing.JRadioButton rBut1;
     private javax.swing.JRadioButton rBut2;
     private javax.swing.JRadioButton rBut3;
     private javax.swing.JRadioButton rBut4;
-    private javax.swing.JTable tabSeleccionarFecha;
     private javax.swing.JTextField txtSeleccionarCliente;
     // End of variables declaration//GEN-END:variables
 }

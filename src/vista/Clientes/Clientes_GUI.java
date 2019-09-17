@@ -93,7 +93,7 @@ public class Clientes_GUI extends javax.swing.JPanel implements MetodosUtiles {
         setPreferredSize(new java.awt.Dimension(785, 530));
 
         labCabecera.setBackground(new java.awt.Color(255, 51, 51));
-        labCabecera.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 24)); // NOI18N
+        labCabecera.setFont(new java.awt.Font("Copperplate Gothic Bold", 1, 24)); // NOI18N
         labCabecera.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labCabecera.setText("CLIENTES");
         labCabecera.setOpaque(true);

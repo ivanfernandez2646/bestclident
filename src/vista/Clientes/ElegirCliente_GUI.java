@@ -5,6 +5,7 @@
  */
 package vista.Clientes;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -40,6 +41,11 @@ public class ElegirCliente_GUI extends javax.swing.JDialog {
 
     public void mostrar() {
         setVisible(true);
+    }
+    
+    //Cambiamos el color del background dependiendo del panel desde el que se haya llamado
+    public void cambiarColorBackground(){
+        labCabecera.setBackground(new Color(204,255,204));
     }
 
     /**

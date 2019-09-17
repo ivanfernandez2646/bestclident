@@ -48,7 +48,7 @@ public class EnviarEmails_GUI extends javax.swing.JPanel {
         setName("Notas Rápidas"); // NOI18N
         setPreferredSize(new java.awt.Dimension(785, 530));
 
-        labCabecera.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        labCabecera.setFont(new java.awt.Font("Copperplate Gothic Light", 1, 24)); // NOI18N
         labCabecera.setForeground(new java.awt.Color(0, 0, 0));
         labCabecera.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labCabecera.setText("ENVIAR EMAILS");
