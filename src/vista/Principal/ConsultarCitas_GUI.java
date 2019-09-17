@@ -269,8 +269,9 @@ public class ConsultarCitas_GUI extends javax.swing.JPanel implements CallBack {
             
             if (!txtFiltroFecha.getText().equals("")) {
                 String anoSelec = String.valueOf(calendario.getAnoSeleccionado());
-                String mesSelec = String.valueOf(calendario.getMesSeleccionado() + 1);
-                fecha = anoSelec + "-" + mesSelec + "-" + calendario.getDiaSeleccionado();
+                int mesSelec = calendario.getMesSeleccionado() + 1;
+                int diaSeleccionado = Integer.parseInt(calendario.getDiaSeleccionado());
+                fecha = String.format("%s-%02d-%02d",anoSelec,mesSelec,diaSeleccionado);
             }
 
             
