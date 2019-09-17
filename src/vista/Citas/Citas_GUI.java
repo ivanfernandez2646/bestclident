@@ -18,11 +18,9 @@ import logica.CallBack;
 import logica.LogicaCita;
 import logica.LogicaServicio;
 import logica.MetodosUtiles;
-//import modelo.CalendarioElegirFecha;
 import modelo.Cita;
 import modelo.Cliente;
 import modelo.Servicio;
-//import modelo.CalendarioElegirFecha.MESES;
 import vista.Clientes.ElegirCliente_GUI;
 import vista.ElegirFechaPanel_Citas;
 
@@ -326,7 +324,7 @@ public class Citas_GUI extends javax.swing.JPanel implements MetodosUtiles, Call
 
     //Concatena la fecha para enviar al siguiente panel para imprimir
     private String concatenarFecha() {
-        return String.format("%s/%d/%d -- %d:%02d", calendario.getDiaSeleccionado(), calendario.getMesSeleccionado(), calendario.getAnoSeleccionado(), horaSeleccionada, minutosSeleccionados);
+        return String.format("%02d/%02d/%d -- %d:%02d", Integer.parseInt(calendario.getDiaSeleccionado()), calendario.getMesSeleccionado()+1, calendario.getAnoSeleccionado(), horaSeleccionada, minutosSeleccionados);
     }
 
     private String comprobarCamposObligatorios() {

@@ -8,6 +8,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Cita;
+import modelo.Cliente;
+import modelo.ListadoCitas;
 
 /**
  *
@@ -15,7 +17,7 @@ import modelo.Cita;
  */
 public class LogicaCita {
 
-    public static List<String> horariosDisponibles(String fecha) throws Exception {
+   public static List<String> horariosDisponibles(String fecha) throws Exception {
 
         String sql = "SELECT time_format(hora,'%H:%i') FROM cita WHERE fecha = ?;";
 
@@ -52,6 +54,31 @@ public class LogicaCita {
             pst.executeUpdate();
         } catch (SQLException ex) {
             throw new Exception("Error altaCita()\n" + ex.getMessage(), ex);
+        }
+    }
+    
+    public static void listadoCitaFiltrado(List<ListadoCitas> tListadoCitas,String filtroDni, String filtroFecha) throws Exception{
+         
+        String sql = "SELECT * FROM cliente c JOIN cita ci ON c.dni = ci.dniCliente JOIN servicio s ON s.id = ci.idServicio LEFT JOIN doctor d ON d.dni = s.dniDoctor"
+                + " WHERE c.dni LIKE ? AND fecha LIKE ?";
+        
+        try (PreparedStatement pst = ConexionBD.getConn().prepareCall(sql)) {
+            pst.setString(1, filtroDni);
+            pst.setString(2, filtroFecha);
+            ResultSet rs = pst.executeQuery();
+            ListadoCitas lc;
+            while(rs.next()){
+                lc = new ListadoCitas();
+                lc.setDniCliente(rs.getString("c.dni"));
+                lc.setNombreCliente(rs.getString("c.nombre"));
+                lc.setId_nombreServicio(rs.getInt("s.id")+". "+rs.getString("s.nombre"));
+                lc.setDni_nombreDoctor(rs.getString("d.dni")+". "+rs.getString("d.nombre"));
+                lc.setFecha(rs.getDate("ci.fecha").toLocalDate());
+                lc.setHora(rs.getTime("ci.hora").toLocalTime());
+                tListadoCitas.add(lc);
+            }
+        } catch (SQLException ex) {
+            throw new Exception("Error listadoCitaFiltrado()", ex);
         }
     }
 }

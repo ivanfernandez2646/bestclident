@@ -105,6 +105,8 @@ public class ElegirCliente_GUI extends javax.swing.JDialog {
         ));
         tabClientesFiltrados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tabClientesFiltrados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabClientesFiltrados.getTableHeader().setResizingAllowed(false);
+        tabClientesFiltrados.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabClientesFiltrados);
 
         butCancelar.setText("Cancelar");

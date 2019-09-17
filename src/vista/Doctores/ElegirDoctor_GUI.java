@@ -100,6 +100,8 @@ public class ElegirDoctor_GUI extends javax.swing.JDialog {
         ));
         tabDoctoresFiltrados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tabDoctoresFiltrados.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabDoctoresFiltrados.getTableHeader().setResizingAllowed(false);
+        tabDoctoresFiltrados.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tabDoctoresFiltrados);
 
         butCancelar.setText("Cancelar");

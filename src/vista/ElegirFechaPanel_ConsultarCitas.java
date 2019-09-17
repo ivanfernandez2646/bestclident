@@ -337,7 +337,7 @@ public class ElegirFechaPanel_ConsultarCitas extends javax.swing.JDialog {
     }
     
     private String concatenarFecha() {
-        return String.format("%s/%d/%d", diaSeleccionado, mesSeleccionado, anoSeleccionado);
+        return String.format("%02d/%02d/%d", Integer.parseInt(diaSeleccionado), mesSeleccionado+1, anoSeleccionado);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
